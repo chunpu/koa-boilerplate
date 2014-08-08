@@ -10,12 +10,13 @@
   "license": "ISC",
   "dependencies": {
     "co": "~3.1.0",
-    "debug": "~1.0.4",
-    "koa-static": "~1.4.5",
-    "koa-logger": "~1.2.2",
     "co-views": "~0.2.0",
-    "koa": "~0.8.2",
+    "debug": "~1.0.4",
+    "jade": "~1.5.0",
     "js-yaml": "~3.1.0",
-    "jade": "~1.5.0"
+    "koa": "~0.8.2",
+    "koa-gzip": "^0.1.0",
+    "koa-logger": "~1.2.2",
+    "koa-static": "~1.4.5"
   }
 }

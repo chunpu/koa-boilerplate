@@ -9,9 +9,13 @@ var error = console.error
 
 module.exports = function(fn, dirname) {
 
+  var _path = function(pathname) {
+    return path.resolve(dirname, pathname)
+  }
+
   var read = function(pathname) {
     return function(cb) {
-      fs.readFile(path.resolve(dirname, pathname), function(err, buf) {
+      fs.readFile(_path(pathname), function(err, buf) {
         if (buf) buf = buf + ''
         cb(err, buf)
       })
@@ -39,13 +43,14 @@ module.exports = function(fn, dirname) {
 
   function addMiddleware() {
     var mw = {}
-    'logger static'.split(' ').forEach(function(x) {
+    'logger static gzip'.split(' ').forEach(function(x) {
       mw[x] = require('koa-' + x)
     })
     var logger = require('koa-logger')
     app.use(mw.logger())
-    app.use(mw.static(path.resolve(dirname, 'static')))
-    app.use(template(path.resolve(dirname, 'views'), {
+    app.use(mw.gzip())
+    app.use(mw.static(_path('static')))
+    app.use(template(_path('views'), {
       map: {
         html: 'jade'
       }
